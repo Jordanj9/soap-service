@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\SoapController;
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware([StartSession::class])->any('/soap', [SoapController::class, 'handleSoapRequest']);
