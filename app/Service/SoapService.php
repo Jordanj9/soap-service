@@ -66,7 +66,7 @@ class SoapService
 
             $token = Str::random(6);
             $sessionId = Str::uuid();
-//            Mail::to($client->email)->send(new ConfirmacionPagoMail($token,$valor));
+            Mail::to($client->email)->send(new ConfirmacionPagoMail($token,$valor));
 
             session()->put('session_id', $sessionId);
             session()->put('token', $token);
@@ -74,7 +74,7 @@ class SoapService
             session()->put('valor', $valor);
 
 
-            return $this->response(true, 00, 'Token enviado al correo', ['id_sesion' => session()->get('session_id'), 'token' => session()->get('token')]);
+            return $this->response(true, 00, 'Token enviado al correo', ['id_sesion' => session()->get('session_id')]);
         } catch (Exception $e) {
             return $this->response(false, $e->getCode(), $e->getMessage());
         }
